@@ -3,7 +3,8 @@ import Post from "../../../components/Post/Post";
 import axios from "../../../axios";
 
 import './Posts.css';
-import {Link} from "react-router-dom";
+
+// import {Link} from "react-router-dom";
 
 class Posts extends Component {
   state = {
@@ -30,7 +31,7 @@ class Posts extends Component {
   }
 
   postSelectedHandler = (id) => {
-    this.setState({selectedPostId: id});
+    this.props.history.push('/' + id);
   }
 
   render() {
@@ -38,10 +39,11 @@ class Posts extends Component {
 
     if (!this.state.error)
       posts = this.state.posts.map((p) =>
-          <Link key={p.id} to={'/' + p.id}>
-            <Post title={p.title}
-                  author={p.author} clicked={() => this.postSelectedHandler(p.id)}/>
-          </Link>);
+              // <Link key={p.id} to={'/' + p.id}>
+              <Post key={p.id} title={p.title}
+                    author={p.author} clicked={() => this.postSelectedHandler(p.id)}/>
+          // </Link>
+      );
     return (
         <section className="Posts">
           {posts}
